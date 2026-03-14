@@ -50,7 +50,7 @@ export default function CertificatesPage() {
             if (!session) throw new Error('Session expirée')
 
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/generate-certificate`,
+                '/api/quiz/generate-certificate',
                 {
                     method: 'POST',
                     headers: {

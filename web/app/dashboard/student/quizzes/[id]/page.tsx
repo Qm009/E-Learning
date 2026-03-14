@@ -81,8 +81,8 @@ export default function QuizPlayer() {
             const { data: { session } } = await supabase.auth.getSession()
             if (!session) throw new Error('Session expirée. Veuillez vous reconnecter.')
 
-            // 1. Call the Edge Function to calculate score securely
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/calculate-score`, {
+            // 1. Call the Internal API Route to calculate score securely
+            const res = await fetch('/api/quiz/calculate-score', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
