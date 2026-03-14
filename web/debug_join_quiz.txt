@@ -1,0 +1,16 @@
+DATA: [
+  {
+    id: '806bceb6-7b01-4bef-bbc5-7ff0c34e4761',
+    title: 'Quiz sur informatique',
+    passing_score_percentage: 60,
+    questions: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object]
+    ],
+    courses: { title: "introduction a l'informatique" }
+  }
+]
+ERROR: null

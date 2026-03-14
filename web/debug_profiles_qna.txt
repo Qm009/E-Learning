@@ -1,0 +1,8 @@
+PROFILES: [
+  {
+    id: '675e686b-83c9-44e7-b793-2cc3709f3296',
+    email: 'yelemoujosias5@gmail.com',
+    role: 'teacher'
+  }
+]
+ERROR: null

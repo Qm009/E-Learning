@@ -1,0 +1,146 @@
+--- ENROLLMENTS ---
+[]
+--- QUIZZES ---
+[
+  {
+    "id": "806bceb6-7b01-4bef-bbc5-7ff0c34e4761",
+    "course_id": "f30a707a-e647-48e3-9042-c5577a00568d",
+    "title": "Quiz sur informatique",
+    "questions": [
+      {
+        "options": [
+          "Option A (Fausse)",
+          "Option B (Correcte)",
+          "Option C (Fausse)",
+          "Option D (Fausse)"
+        ],
+        "question": "[Demo] Question 1 générée pour: informatique (Difficulté: intermédiaire)",
+        "explanation": "Explication démo pour la question 1 sur informatique.",
+        "correctAnswer": "Option B (Correcte)"
+      },
+      {
+        "options": [
+          "Option A (Fausse)",
+          "Option B (Correcte)",
+          "Option C (Fausse)",
+          "Option D (Fausse)"
+        ],
+        "question": "[Demo] Question 2 générée pour: informatique (Difficulté: intermédiaire)",
+        "explanation": "Explication démo pour la question 2 sur informatique.",
+        "correctAnswer": "Option B (Correcte)"
+      },
+      {
+        "options": [
+          "Option A (Fausse)",
+          "Option B (Correcte)",
+          "Option C (Fausse)",
+          "Option D (Fausse)"
+        ],
+        "question": "[Demo] Question 3 générée pour: informatique (Difficulté: intermédiaire)",
+        "explanation": "Explication démo pour la question 3 sur informatique.",
+        "correctAnswer": "Option B (Correcte)"
+      },
+      {
+        "options": [
+          "Option A (Fausse)",
+          "Option B (Correcte)",
+          "Option C (Fausse)",
+          "Option D (Fausse)"
+        ],
+        "question": "[Demo] Question 4 générée pour: informatique (Difficulté: intermédiaire)",
+        "explanation": "Explication démo pour la question 4 sur informatique.",
+        "correctAnswer": "Option B (Correcte)"
+      },
+      {
+        "options": [
+          "Option A (Fausse)",
+          "Option B (Correcte)",
+          "Option C (Fausse)",
+          "Option D (Fausse)"
+        ],
+        "question": "[Demo] Question 5 générée pour: informatique (Difficulté: intermédiaire)",
+        "explanation": "Explication démo pour la question 5 sur informatique.",
+        "correctAnswer": "Option B (Correcte)"
+      },
+      {
+        "options": [
+          "Option A (Fausse)",
+          "Option B (Correcte)",
+          "Option C (Fausse)",
+          "Option D (Fausse)"
+        ],
+        "question": "[Demo] Question 6 générée pour: informatique (Difficulté: intermédiaire)",
+        "explanation": "Explication démo pour la question 6 sur informatique.",
+        "correctAnswer": "Option B (Correcte)"
+      },
+      {
+        "options": [
+          "Option A (Fausse)",
+          "Option B (Correcte)",
+          "Option C (Fausse)",
+          "Option D (Fausse)"
+        ],
+        "question": "[Demo] Question 7 générée pour: informatique (Difficulté: intermédiaire)",
+        "explanation": "Explication démo pour la question 7 sur informatique.",
+        "correctAnswer": "Option B (Correcte)"
+      },
+      {
+        "options": [
+          "Option A (Fausse)",
+          "Option B (Correcte)",
+          "Option C (Fausse)",
+          "Option D (Fausse)"
+        ],
+        "question": "[Demo] Question 8 générée pour: informatique (Difficulté: intermédiaire)",
+        "explanation": "Explication démo pour la question 8 sur informatique.",
+        "correctAnswer": "Option B (Correcte)"
+      },
+      {
+        "options": [
+          "Option A (Fausse)",
+          "Option B (Correcte)",
+          "Option C (Fausse)",
+          "Option D (Fausse)"
+        ],
+        "question": "[Demo] Question 9 générée pour: informatique (Difficulté: intermédiaire)",
+        "explanation": "Explication démo pour la question 9 sur informatique.",
+        "correctAnswer": "Option B (Correcte)"
+      }
+    ],
+    "passing_score_percentage": 60,
+    "created_at": "2026-03-14T07:26:43.003981+00:00"
+  }
+]
+--- COURSES ---
+[
+  {
+    "id": "f30a707a-e647-48e3-9042-c5577a00568d",
+    "title": "introduction a l'informatique",
+    "status": "published"
+  },
+  {
+    "id": "7c743877-d539-4a32-a605-f15b2ebc12c1",
+    "title": "introduction a l'informatique",
+    "status": "published"
+  },
+  {
+    "id": "381d2cdc-2f47-4075-936d-df9459b6e513",
+    "title": "introduction a l'informatique",
+    "status": "published"
+  },
+  {
+    "id": "7595db04-3497-421a-a6a9-fad9ba2db2eb",
+    "title": "introduction a l'informatique",
+    "status": "published"
+  },
+  {
+    "id": "dfb8c13e-8a0f-49c5-81d7-3c130e2aaa4a",
+    "title": "intoduction a l'informatique",
+    "status": "published"
+  },
+  {
+    "id": "bcd146ed-b0a8-4ef9-929f-980d7ec7bae7",
+    "title": "introduction a l'informatique",
+    "status": "published"
+  }
+]

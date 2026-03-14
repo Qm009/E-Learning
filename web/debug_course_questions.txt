@@ -1,0 +1,7 @@
+QUESTIONS: null
+ERROR: {
+  code: 'PGRST205',
+  details: null,
+  hint: "Perhaps you meant the table 'public.course_materials'",
+  message: "Could not find the table 'public.course_questions' in the schema cache"
+}

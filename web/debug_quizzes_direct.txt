@@ -1,0 +1,8 @@
+QUIZZES: [
+  {
+    id: '806bceb6-7b01-4bef-bbc5-7ff0c34e4761',
+    title: 'Quiz sur informatique',
+    course_id: 'f30a707a-e647-48e3-9042-c5577a00568d'
+  }
+]
+ERROR: null

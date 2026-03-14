@@ -1,0 +1,2 @@
+COURSES COUNT: [ { count: 6 } ]
+ERROR: null

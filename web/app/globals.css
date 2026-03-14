@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --background: 248 250 252;
+    --foreground: 15 23 42;
+    --primary: 99 102 241;
+    --primary-foreground: 255 255 255;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
+    --border: 226 232 240;
+    --card: 255 255 255;
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 15 23 42;
+    --foreground: 248 250 252;
+    --primary: 99 102 241;
+    --primary-foreground: 255 255 255;
+    --muted: 30 27 75;
+    --muted-foreground: 148 163 184;
+    --border: 51 65 85;
+    --card: 22 30 53;
+  }
+
+  * {
+    @apply border-neutral-200 dark:border-neutral-700;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-white/20 dark:border-white/10;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-card hover:-translate-y-0.5;
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, #6366F1 0%, #4338CA 100%);
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  }
+}
