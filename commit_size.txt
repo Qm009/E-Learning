@@ -1,0 +1,225 @@
+ .vscode/settings.json                              |   27 +
+ gh_create_result.txt                               |    1 +
+ git_commit_result.txt                              |    6 +
+ git_debug_branch.txt                               |    3 +
+ git_log_check.txt                                  |    1 +
+ git_push_result.txt                                |    3 +
+ git_remote_check.txt                               |    0
+ mobile/.gitignore                                  |   15 +
+ mobile/.idea/.gitignore                            |    3 +
+ mobile/.idea/.name                                 |    1 +
+ mobile/.idea/AndroidProjectSystem.xml              |    6 +
+ mobile/.idea/codeStyles/Project.xml                |  123 +++
+ mobile/.idea/codeStyles/codeStyleConfig.xml        |    5 +
+ mobile/.idea/compiler.xml                          |    6 +
+ mobile/.idea/deploymentTargetSelector.xml          |   10 +
+ mobile/.idea/deviceManager.xml                     |   13 +
+ mobile/.idea/gradle.xml                            |   18 +
+ mobile/.idea/misc.xml                              |    7 +
+ mobile/.idea/runConfigurations.xml                 |   17 +
+ mobile/.idea/runConfigurations/main_dart.xml       |    6 +
+ mobile/.idea/vcs.xml                               |    6 +
+ mobile/.metadata                                   |   45 +
+ mobile/README.md                                   |   17 +
+ mobile/analysis_options.yaml                       |   28 +
+ mobile/android/.gitignore                          |   14 +
+ mobile/android/app/build.gradle.kts                |   44 +
+ mobile/android/app/src/debug/AndroidManifest.xml   |    7 +
+ mobile/android/app/src/main/AndroidManifest.xml    |   48 +
+ .../com/example/elearning_mobile/MainActivity.kt   |    5 +
+ .../main/res/drawable-v21/launch_background.xml    |   12 +
+ .../src/main/res/drawable/launch_background.xml    |   12 +
+ .../app/src/main/res/mipmap-hdpi/ic_launcher.png   |  Bin 0 -> 544 bytes
+ .../app/src/main/res/mipmap-mdpi/ic_launcher.png   |  Bin 0 -> 442 bytes
+ .../app/src/main/res/mipmap-xhdpi/ic_launcher.png  |  Bin 0 -> 721 bytes
+ .../app/src/main/res/mipmap-xxhdpi/ic_launcher.png |  Bin 0 -> 1031 bytes
+ .../src/main/res/mipmap-xxxhdpi/ic_launcher.png    |  Bin 0 -> 1443 bytes
+ .../app/src/main/res/values-night/styles.xml       |   18 +
+ mobile/android/app/src/main/res/values/styles.xml  |   18 +
+ mobile/android/app/src/profile/AndroidManifest.xml |    7 +
+ mobile/android/build.gradle.kts                    |   24 +
+ mobile/android/gradle.properties                   |    6 +
+ .../gradle/wrapper/gradle-wrapper.properties       |    5 +
+ mobile/android/settings.gradle.kts                 |   26 +
+ mobile/app/.gitignore                              |    1 +
+ mobile/app/build.gradle.kts                        |   51 +
+ mobile/app/proguard-rules.pro                      |   21 +
+ .../example/e_learning/ExampleInstrumentedTest.kt  |   24 +
+ mobile/app/src/main/AndroidManifest.xml            |   26 +
+ .../java/com/example/e_learning/FirstFragment.kt   |   44 +
+ .../java/com/example/e_learning/MainActivity.kt    |   59 ++
+ .../java/com/example/e_learning/SecondFragment.kt  |   44 +
+ .../main/res/drawable/ic_launcher_background.xml   |  170 +++
+ .../main/res/drawable/ic_launcher_foreground.xml   |   30 +
+ mobile/app/src/main/res/layout/activity_main.xml   |   33 +
+ mobile/app/src/main/res/layout/content_main.xml    |   19 +
+ mobile/app/src/main/res/layout/fragment_first.xml  |   35 +
+ mobile/app/src/main/res/layout/fragment_second.xml |   35 +
+ mobile/app/src/main/res/menu/menu_main.xml         |   10 +
+ .../src/main/res/mipmap-anydpi-v26/ic_launcher.xml |    6 +
+ .../res/mipmap-anydpi-v26/ic_launcher_round.xml    |    6 +
+ .../app/src/main/res/mipmap-hdpi/ic_launcher.webp  |  Bin 0 -> 1404 bytes
+ .../main/res/mipmap-hdpi/ic_launcher_round.webp    |  Bin 0 -> 2898 bytes
+ .../app/src/main/res/mipmap-mdpi/ic_launcher.webp  |  Bin 0 -> 982 bytes
+ .../main/res/mipmap-mdpi/ic_launcher_round.webp    |  Bin 0 -> 1772 bytes
+ .../app/src/main/res/mipmap-xhdpi/ic_launcher.webp |  Bin 0 -> 1900 bytes
+ .../main/res/mipmap-xhdpi/ic_launcher_round.webp   |  Bin 0 -> 3918 bytes
+ .../src/main/res/mipmap-xxhdpi/ic_launcher.webp    |  Bin 0 -> 2884 bytes
+ .../main/res/mipmap-xxhdpi/ic_launcher_round.webp  |  Bin 0 -> 5914 bytes
+ .../src/main/res/mipmap-xxxhdpi/ic_launcher.webp   |  Bin 0 -> 3844 bytes
+ .../main/res/mipmap-xxxhdpi/ic_launcher_round.webp |  Bin 0 -> 7778 bytes
+ mobile/app/src/main/res/navigation/nav_graph.xml   |   28 +
+ mobile/app/src/main/res/values-land/dimens.xml     |    3 +
+ mobile/app/src/main/res/values-night/themes.xml    |    7 +
+ mobile/app/src/main/res/values-v23/themes.xml      |    9 +
+ mobile/app/src/main/res/values-w1240dp/dimens.xml  |    3 +
+ mobile/app/src/main/res/values-w600dp/dimens.xml   |    3 +
+ mobile/app/src/main/res/values/colors.xml          |    5 +
+ mobile/app/src/main/res/values/dimens.xml          |    3 +
+ mobile/app/src/main/res/values/strings.xml         |   46 +
+ mobile/app/src/main/res/values/themes.xml          |    9 +
+ mobile/app/src/main/res/xml/backup_rules.xml       |   13 +
+ .../app/src/main/res/xml/data_extraction_rules.xml |   19 +
+ .../java/com/example/e_learning/ExampleUnitTest.kt |   17 +
+ mobile/build.gradle.kts                            |    4 +
+ mobile/build_log.txt                               |   21 +
+ mobile/gradle.properties                           |   18 +
+ mobile/gradle/gradle-daemon-jvm.properties         |   12 +
+ mobile/gradle/libs.versions.toml                   |   26 +
+ mobile/gradle/wrapper/gradle-wrapper.jar           |  Bin 0 -> 45457 bytes
+ mobile/gradle/wrapper/gradle-wrapper.properties    |    9 +
+ mobile/gradlew                                     |  251 +++++
+ mobile/gradlew.bat                                 |   94 ++
+ mobile/ios/.gitignore                              |   34 +
+ mobile/ios/Flutter/AppFrameworkInfo.plist          |   24 +
+ mobile/ios/Flutter/Debug.xcconfig                  |    1 +
+ mobile/ios/Flutter/Release.xcconfig                |    1 +
+ mobile/ios/Runner.xcodeproj/project.pbxproj        |  620 +++++++++++
+ .../project.xcworkspace/contents.xcworkspacedata   |    7 +
+ .../xcshareddata/IDEWorkspaceChecks.plist          |    8 +
+ .../xcshareddata/WorkspaceSettings.xcsettings      |    8 +
+ .../xcshareddata/xcschemes/Runner.xcscheme         |  101 ++
+ .../Runner.xcworkspace/contents.xcworkspacedata    |    7 +
+ .../xcshareddata/IDEWorkspaceChecks.plist          |    8 +
+ .../xcshareddata/WorkspaceSettings.xcsettings      |    8 +
+ mobile/ios/Runner/AppDelegate.swift                |   16 +
+ .../AppIcon.appiconset/Contents.json               |  122 +++
+ .../AppIcon.appiconset/Icon-App-1024x1024@1x.png   |  Bin 0 -> 10932 bytes
+ .../AppIcon.appiconset/Icon-App-20x20@1x.png       |  Bin 0 -> 295 bytes
+ .../AppIcon.appiconset/Icon-App-20x20@2x.png       |  Bin 0 -> 406 bytes
+ .../AppIcon.appiconset/Icon-App-20x20@3x.png       |  Bin 0 -> 450 bytes
+ .../AppIcon.appiconset/Icon-App-29x29@1x.png       |  Bin 0 -> 282 bytes
+ .../AppIcon.appiconset/Icon-App-29x29@2x.png       |  Bin 0 -> 462 bytes
+ .../AppIcon.appiconset/Icon-App-29x29@3x.png       |  Bin 0 -> 704 bytes
+ .../AppIcon.appiconset/Icon-App-40x40@1x.png       |  Bin 0 -> 406 bytes
+ .../AppIcon.appiconset/Icon-App-40x40@2x.png       |  Bin 0 -> 586 bytes
+ .../AppIcon.appiconset/Icon-App-40x40@3x.png       |  Bin 0 -> 862 bytes
+ .../AppIcon.appiconset/Icon-App-60x60@2x.png       |  Bin 0 -> 862 bytes
+ .../AppIcon.appiconset/Icon-App-60x60@3x.png       |  Bin 0 -> 1674 bytes
+ .../AppIcon.appiconset/Icon-App-76x76@1x.png       |  Bin 0 -> 762 bytes
+ .../AppIcon.appiconset/Icon-App-76x76@2x.png       |  Bin 0 -> 1226 bytes
+ .../AppIcon.appiconset/Icon-App-83.5x83.5@2x.png   |  Bin 0 -> 1418 bytes
+ .../LaunchImage.imageset/Contents.json             |   23 +
+ .../LaunchImage.imageset/LaunchImage.png           |  Bin 0 -> 68 bytes
+ .../LaunchImage.imageset/LaunchImage@2x.png        |  Bin 0 -> 68 bytes
+ .../LaunchImage.imageset/LaunchImage@3x.png        |  Bin 0 -> 68 bytes
+ .../Assets.xcassets/LaunchImage.imageset/README.md |    5 +
+ .../ios/Runner/Base.lproj/LaunchScreen.storyboard  |   37 +
+ mobile/ios/Runner/Base.lproj/Main.storyboard       |   26 +
+ mobile/ios/Runner/Info.plist                       |   70 ++
+ mobile/ios/Runner/Runner-Bridging-Header.h         |    1 +
+ mobile/ios/Runner/SceneDelegate.swift              |    6 +
+ mobile/ios/RunnerTests/RunnerTests.swift           |   12 +
+ mobile/lib/app/router.dart                         |    9 +
+ .../features/auth/presentation/login_screen.dart   |  185 ++--
+ .../auth/presentation/register_screen.dart         |  263 +++--
+ .../auth/presentation/widgets/auth_background.dart |   51 +
+ .../course/presentation/course_catalog_screen.dart |  215 ++--
+ .../course/presentation/course_detail_screen.dart  |  275 +++--
+ .../course/presentation/create_course_screen.dart  |  260 +++++
+ .../dashboard/presentation/student_dashboard.dart  |  162 ++-
+ .../dashboard/presentation/teacher_dashboard.dart  |  192 +++-
+ .../lib/features/qna/presentation/qna_screen.dart  |  200 ++--
+ .../qna/presentation/teacher_qna_screen.dart       |  150 ++-
+ .../features/quiz/presentation/quiz_screen.dart    |  805 +++++++-------
+ mobile/lib/main.dart                               |   35 +-
+ mobile/lib/shared/widgets/course_card.dart         |  117 +-
+ mobile/lib/shared/widgets/profile_header.dart      |   66 +-
+ mobile/linux/.gitignore                            |    1 +
+ mobile/linux/CMakeLists.txt                        |  128 +++
+ mobile/linux/flutter/CMakeLists.txt                |   88 ++
+ .../linux/flutter/generated_plugin_registrant.cc   |   19 +
+ mobile/linux/flutter/generated_plugin_registrant.h |   15 +
+ mobile/linux/flutter/generated_plugins.cmake       |   25 +
+ mobile/linux/runner/CMakeLists.txt                 |   26 +
+ mobile/linux/runner/main.cc                        |    6 +
+ mobile/linux/runner/my_application.cc              |  148 +++
+ mobile/linux/runner/my_application.h               |   21 +
+ mobile/macos/.gitignore                            |    7 +
+ mobile/macos/Flutter/Flutter-Debug.xcconfig        |    1 +
+ mobile/macos/Flutter/Flutter-Release.xcconfig      |    1 +
+ .../macos/Flutter/GeneratedPluginRegistrant.swift  |   18 +
+ mobile/macos/Runner.xcodeproj/project.pbxproj      |  705 +++++++++++++
+ .../xcshareddata/IDEWorkspaceChecks.plist          |    8 +
+ .../xcshareddata/xcschemes/Runner.xcscheme         |   99 ++
+ .../Runner.xcworkspace/contents.xcworkspacedata    |    7 +
+ .../xcshareddata/IDEWorkspaceChecks.plist          |    8 +
+ mobile/macos/Runner/AppDelegate.swift              |   13 +
+ .../AppIcon.appiconset/Contents.json               |   68 ++
+ .../AppIcon.appiconset/app_icon_1024.png           |  Bin 0 -> 102994 bytes
+ .../AppIcon.appiconset/app_icon_128.png            |  Bin 0 -> 5680 bytes
+ .../AppIcon.appiconset/app_icon_16.png             |  Bin 0 -> 520 bytes
+ .../AppIcon.appiconset/app_icon_256.png            |  Bin 0 -> 14142 bytes
+ .../AppIcon.appiconset/app_icon_32.png             |  Bin 0 -> 1066 bytes
+ .../AppIcon.appiconset/app_icon_512.png            |  Bin 0 -> 36406 bytes
+ .../AppIcon.appiconset/app_icon_64.png             |  Bin 0 -> 2218 bytes
+ mobile/macos/Runner/Base.lproj/MainMenu.xib        |  343 ++++++
+ mobile/macos/Runner/Configs/AppInfo.xcconfig       |   14 +
+ mobile/macos/Runner/Configs/Debug.xcconfig         |    2 +
+ mobile/macos/Runner/Configs/Release.xcconfig       |    2 +
+ mobile/macos/Runner/Configs/Warnings.xcconfig      |   13 +
+ mobile/macos/Runner/DebugProfile.entitlements      |   12 +
+ mobile/macos/Runner/Info.plist                     |   32 +
+ mobile/macos/Runner/MainFlutterWindow.swift        |   15 +
+ mobile/macos/Runner/Release.entitlements           |    8 +
+ mobile/macos/RunnerTests/RunnerTests.swift         |   12 +
+ mobile/pubspec.lock                                | 1114 ++++++++++++++++++++
+ mobile/pubspec.yaml                                |    2 +
+ mobile/settings.gradle.kts                         |   26 +
+ mobile/test/widget_test.dart                       |   30 +
+ mobile/web/favicon.png                             |  Bin 0 -> 917 bytes
+ mobile/web/icons/Icon-192.png                      |  Bin 0 -> 5292 bytes
+ mobile/web/icons/Icon-512.png                      |  Bin 0 -> 8252 bytes
+ mobile/web/icons/Icon-maskable-192.png             |  Bin 0 -> 5594 bytes
+ mobile/web/icons/Icon-maskable-512.png             |  Bin 0 -> 20998 bytes
+ mobile/web/index.html                              |   46 +
+ mobile/web/manifest.json                           |   35 +
+ mobile/windows/.gitignore                          |   17 +
+ mobile/windows/CMakeLists.txt                      |  108 ++
+ mobile/windows/flutter/CMakeLists.txt              |  109 ++
+ .../windows/flutter/generated_plugin_registrant.cc |   17 +
+ .../windows/flutter/generated_plugin_registrant.h  |   15 +
+ mobile/windows/flutter/generated_plugins.cmake     |   25 +
+ mobile/windows/runner/CMakeLists.txt               |   40 +
+ mobile/windows/runner/Runner.rc                    |  121 +++
+ mobile/windows/runner/flutter_window.cpp           |   71 ++
+ mobile/windows/runner/flutter_window.h             |   33 +
+ mobile/windows/runner/main.cpp                     |   43 +
+ mobile/windows/runner/resource.h                   |   16 +
+ mobile/windows/runner/resources/app_icon.ico       |  Bin 0 -> 33772 bytes
+ mobile/windows/runner/runner.exe.manifest          |   14 +
+ mobile/windows/runner/utils.cpp                    |   65 ++
+ mobile/windows/runner/utils.h                      |   19 +
+ mobile/windows/runner/win32_window.cpp             |  288 +++++
+ mobile/windows/runner/win32_window.h               |  102 ++
+ package-lock.json                                  |   21 +-
+ web/.eslintrc.json                                 |    3 +-
+ web/build_out.txt                                  |   30 +
+ web/lint_output.txt                                |   77 ++
+ web/package.json                                   |    9 +-
+ web/test-signup.cjs                                |   24 +
+ web/test-signup.js                                 |   31 +
+ web/test-signup.mjs                                |   19 +
+ web/tsconfig.json                                  |    5 +-
+ web/tsconfig.tsbuildinfo                           |    1 +
+ 224 files changed, 9329 insertions(+), 1069 deletions(-)

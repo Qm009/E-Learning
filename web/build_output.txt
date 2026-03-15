@@ -1,0 +1,55 @@
+
+> elearning-web@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.29
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/22) ...
+   Generating static pages (5/22) 
+   Generating static pages (10/22) 
+   Generating static pages (16/22) 
+ ✓ Generating static pages (22/22)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                               Size     First Load JS
+┌ ƒ /                                     183 B            96 kB
+├ ○ /_not-found                           873 B            88 kB
+├ ƒ /api/quiz/calculate-score             0 B                0 B
+├ ƒ /api/quiz/feedback                    0 B                0 B
+├ ƒ /api/quiz/generate                    0 B                0 B
+├ ƒ /api/quiz/generate-certificate        0 B                0 B
+├ ƒ /dashboard/admin                      183 B            96 kB
+├ ○ /dashboard/settings                   3.21 kB         145 kB
+├ ƒ /dashboard/student                    183 B            96 kB
+├ ○ /dashboard/student/certificates       3.15 kB         154 kB
+├ ○ /dashboard/student/courses            2.63 kB         153 kB
+├ ƒ /dashboard/student/courses/[id]       1.45 kB         152 kB
+├ ○ /dashboard/student/qna                2.73 kB         145 kB
+├ ○ /dashboard/student/quizzes            2.92 kB         154 kB
+├ ƒ /dashboard/student/quizzes/[id]       4.79 kB         155 kB
+├ ƒ /dashboard/teacher                    183 B            96 kB
+├ ƒ /dashboard/teacher/courses            1.55 kB         152 kB
+├ ƒ /dashboard/teacher/courses/edit/[id]  3.87 kB         155 kB
+├ ○ /dashboard/teacher/courses/new        3.52 kB         145 kB
+├ ○ /dashboard/teacher/qna                3.1 kB          145 kB
+├ ○ /dashboard/teacher/quizzes            5.41 kB         147 kB
+├ ○ /login                                2.25 kB         153 kB
+└ ○ /register                             2.5 kB          153 kB
++ First Load JS shared by all             87.2 kB
+  ├ chunks/364-981aef777d622c2e.js        31.6 kB
+  ├ chunks/618f8807-38f5a4a49f2211be.js   53.6 kB
+  └ other shared chunks (total)           1.96 kB
+
+
+ƒ Middleware                              74.6 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

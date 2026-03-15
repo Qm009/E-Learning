@@ -138,7 +138,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                     color: theme.cardTheme.color,
                     borderRadius: BorderRadius.circular(32),
                     border: theme.cardTheme.shape is RoundedRectangleBorder 
-                        ? (theme.cardTheme.shape as RoundedRectangleBorder).side 
+                        ? Border.fromBorderSide((theme.cardTheme.shape as RoundedRectangleBorder).side) 
                         : Border.all(color: theme.dividerColor),
                   ),
                   child: Column(

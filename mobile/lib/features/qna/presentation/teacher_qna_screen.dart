@@ -178,7 +178,7 @@ class _TeacherQnAScreenState extends State<TeacherQnAScreen> {
                        Text(q['profiles']?['full_name'] ?? 'Étudiant inconnu', style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold)),
                        Text(
                         q['courses']?['title']?.toUpperCase() ?? 'COURS', 
-                        style: TextStyle(fontSize: 9, color: theme.colorScheme.onSurface.withOpacity(0.5), fontWeight: FontWeight.black, letterSpacing: 1)
+                        style: TextStyle(fontSize: 9, color: theme.colorScheme.onSurface.withOpacity(0.5), fontWeight: FontWeight.w900, letterSpacing: 1)
                        ),
                      ],
                    ),

@@ -60,7 +60,7 @@ class EduFlowApp extends StatelessWidget {
         foregroundColor: isLight ? const Color(0xFF0F172A) : Colors.white,
         surfaceTintColor: Colors.transparent,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: isLight ? Colors.white : const Color(0xFF161E35),
         elevation: 0,
         shape: RoundedRectangleBorder(

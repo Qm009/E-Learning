@@ -220,7 +220,7 @@ class _QuizCard extends StatelessWidget {
                       courseName.toUpperCase(),
                       style: TextStyle(
                         fontSize: 9,
-                        fontWeight: FontWeight.black,
+                        fontWeight: FontWeight.w900,
                         color: theme.colorScheme.primary,
                         letterSpacing: 1,
                       ),
@@ -351,7 +351,7 @@ class _QuizPlayerScreenState extends State<QuizPlayerScreen> {
             children: [
               Text(
                 'QUESTION ${_currentStep + 1} SUR ${questions.length}',
-                style: const TextStyle(color: Color(0xFF6366F1), fontWeight: FontWeight.black, fontSize: 12, letterSpacing: 1.5),
+                style: const TextStyle(color: Color(0xFF6366F1), fontWeight: FontWeight.w900, fontSize: 12, letterSpacing: 1.5),
               ),
               const SizedBox(height: 16),
               Text(

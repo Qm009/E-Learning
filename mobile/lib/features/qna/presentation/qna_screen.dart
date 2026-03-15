@@ -241,7 +241,7 @@ class _QnAScreenState extends State<QnAScreen> {
                           ),
                           child: Text(
                             q['courses']['title']?.toUpperCase() ?? 'COURS',
-                            style: TextStyle(fontSize: 9, fontWeight: FontWeight.black, color: theme.colorScheme.primary, letterSpacing: 1),
+                            style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: theme.colorScheme.primary, letterSpacing: 1),
                           ),
                         ),
                         Text(
@@ -276,7 +276,7 @@ class _QnAScreenState extends State<QnAScreen> {
                           const SizedBox(width: 8),
                           Text(
                             'RÉPONSE DU PROFESSEUR', 
-                            style: theme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.black, color: const Color(0xFF10B981), letterSpacing: 1)
+                            style: theme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w900, color: const Color(0xFF10B981), letterSpacing: 1)
                           ),
                         ],
                       ),
