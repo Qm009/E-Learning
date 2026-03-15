@@ -26,7 +26,7 @@ class _CourseCatalogScreenState extends State<CourseCatalogScreen> {
           .from('courses')
           .select('id, title, image_url, description, teacher:profiles!teacher_id(full_name)')
           .eq('status', 'published')
-          .order('created_at', descending: true);
+          .order('created_at', ascending: false);
       
       setState(() {
         _courses = data;
@@ -56,9 +56,13 @@ class _CourseCatalogScreenState extends State<CourseCatalogScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Inscription réussie !'), backgroundColor: Colors.green),
+          const SnackBar(
+            content: Text('Inscription réussie !'), 
+            backgroundColor: Color(0xFF10B981),
+            behavior: SnackBarBehavior.floating,
+          ),
         );
-        Navigator.pop(context, true); // Return true to refresh dashboard
+        Navigator.pop(context, true); 
       }
     } catch (e) {
       if (mounted) {
@@ -71,88 +75,147 @@ class _CourseCatalogScreenState extends State<CourseCatalogScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        title: const Text('Catalogue des Cours', style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0,
+        title: Text(
+          'Catalogue',
+          style: theme.textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.w900,
+            letterSpacing: -0.5,
+          ),
+        ),
+        centerTitle: false,
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : _courses.isEmpty
-              ? const Center(child: Text('Aucun cours disponible pour le moment.'))
-              : ListView.builder(
-                  padding: const EdgeInsets.all(20),
-                  itemCount: _courses.length,
-                  itemBuilder: (context, index) {
-                    final course = _courses[index];
-                    final teacher = course['teacher'];
-                    
-                    return Card(
-                      margin: const EdgeInsets.only(bottom: 20),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (course['image_url'] != null)
-                            ClipRRect(
-                              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                              child: Image.network(
-                                course['image_url'],
-                                height: 160,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  teacher?['full_name'] ?? 'Professeur',
-                                  style: const TextStyle(
-                                    color: Color(0xFF6366F1),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  course['title'],
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                Text(
-                                  course['description'] ?? '',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(color: Colors.grey[600]),
-                                ),
-                                const SizedBox(height: 20),
-                                ElevatedButton(
-                                  onPressed: () => _enroll(course['id']),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF6366F1),
-                                    foregroundColor: Colors.white,
-                                    minimumSize: const Size(double.infinity, 50),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                  ),
-                                  child: const Text('S\'inscrire gratuitement', style: TextStyle(fontWeight: FontWeight.bold)),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+          : Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    decoration: BoxDecoration(
+                      color: theme.cardTheme.color,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: theme.dividerColor),
+                    ),
+                    child: const TextField(
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.search_rounded, size: 20),
+                        hintText: 'Rechercher un cours...',
+                        border: InputBorder.none,
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
+                Expanded(
+                  child: _courses.isEmpty
+                      ? Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(Icons.search_off_rounded, size: 64, color: theme.colorScheme.onSurface.withOpacity(0.1)),
+                              const SizedBox(height: 16),
+                              const Text('Aucun cours trouvé.'),
+                            ],
+                          ),
+                        )
+                      : ListView.builder(
+                          padding: const EdgeInsets.all(24),
+                          itemCount: _courses.length,
+                          itemBuilder: (context, index) {
+                            final course = _courses[index];
+                            final teacher = course['teacher'];
+                            
+                            return Container(
+                              margin: const EdgeInsets.only(bottom: 24),
+                              decoration: BoxDecoration(
+                                color: theme.cardTheme.color,
+                                borderRadius: BorderRadius.circular(32),
+                                border: Border.all(
+                                  color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.04),
+                                    blurRadius: 20,
+                                    offset: const Offset(0, 10),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (course['image_url'] != null)
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+                                      child: Image.network(
+                                        course['image_url'],
+                                        height: 180,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(24),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                          decoration: BoxDecoration(
+                                            color: theme.colorScheme.primary.withOpacity(0.1),
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          child: Text(
+                                            'PROFESSEUR: ${teacher?['full_name']?.toUpperCase() ?? 'INCONNU'}',
+                                            style: TextStyle(
+                                              color: theme.colorScheme.primary,
+                                              fontWeight: FontWeight.w900,
+                                              fontSize: 10,
+                                              letterSpacing: 1.1,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Text(
+                                          course['title'],
+                                          style: theme.textTheme.titleLarge?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 12),
+                                        Text(
+                                          course['description'] ?? '',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: theme.textTheme.bodyMedium?.copyWith(
+                                            color: theme.colorScheme.onSurface.withOpacity(0.6),
+                                            height: 1.5,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 24),
+                                        ElevatedButton(
+                                          onPressed: () => _enroll(course['id']),
+                                          style: theme.elevatedButtonTheme.style?.copyWith(
+                                            minimumSize: MaterialStateProperty.all(const Size(double.infinity, 54)),
+                                          ),
+                                          child: const Text('S\'inscrire gratuitement', style: TextStyle(fontWeight: FontWeight.bold)),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                ),
+              ],
+            ),
     );
   }
 }

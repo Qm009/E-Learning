@@ -1,0 +1,3 @@
+* main
+origin	https://github.com/Qm009/E-Learning.git (fetch)
+origin	https://github.com/Qm009/E-Learning.git (push)

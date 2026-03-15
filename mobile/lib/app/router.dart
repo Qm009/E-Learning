@@ -10,6 +10,7 @@ import '../features/quiz/presentation/quiz_screen.dart';
 import '../features/course/presentation/course_catalog_screen.dart';
 import '../features/qna/presentation/qna_screen.dart';
 import '../features/qna/presentation/teacher_qna_screen.dart';
+import '../features/course/presentation/create_course_screen.dart';
 
 final supabase = Supabase.instance.client;
 
@@ -71,6 +72,14 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/teacher/qna',
       builder: (context, state) => const TeacherQnAScreen(),
+    ),
+    GoRoute(
+      path: '/courses/new',
+      builder: (context, state) => const CreateCourseScreen(),
+    ),
+    GoRoute(
+      path: '/teacher/quizzes',
+      builder: (context, state) => const QuizListScreen(), // Utilise la liste de quiz partagée
     ),
   ],
 );

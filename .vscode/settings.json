@@ -1,0 +1,27 @@
+{
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "css.customData": [],
+    "tailwindCSS.experimental.classRegex": [
+        [
+            "cva\\(([^)]*)\\)",
+            "[\"'`]([^\"'`]*).*?[\"'`]"
+        ],
+        [
+            "cx\\(([^)]*)\\)",
+            "(?:'|\"|`)([^']*)(?:'|\"|`)"
+        ]
+    ],
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "deno.enablePaths": [
+        "supabase/functions"
+    ],
+    "deno.importMap": "supabase/functions/import_map.json",
+    "deno.unstable": true
+}

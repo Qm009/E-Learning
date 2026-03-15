@@ -1,0 +1,30 @@
+
+> elearning-web@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.29
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./app/(auth)/login/page.tsx:13:31
+Type error: Untyped function calls may not accept type arguments.
+
+[0m [90m 11 |[39m     [36mconst[39m [password[33m,[39m setPassword] [33m=[39m useState([32m''[39m)[0m
+[0m [90m 12 |[39m     [36mconst[39m [loading[33m,[39m setLoading] [33m=[39m useState([36mfalse[39m)[0m
+[0m[31m[1m>[22m[39m[90m 13 |[39m     [36mconst[39m [error[33m,[39m setError] [33m=[39m useState[33m<[39m[33mstring[39m [33m|[39m [36mnull[39m[33m>[39m([36mnull[39m)[0m
+[0m [90m    |[39m                               [31m[1m^[22m[39m[0m
+[0m [90m 14 |[39m     [36mconst[39m [currentUser[33m,[39m setCurrentUser] [33m=[39m useState[33m<[39m[33many[39m[33m>[39m([36mnull[39m)[0m
+[0m [90m 15 |[39m     [36mconst[39m router [33m=[39m useRouter()[0m
+[0m [90m 16 |[39m     [36mconst[39m supabase [33m=[39m createClient()[0m
+Next.js build worker exited with code: 1 and signal: null
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path /home/Josias/Desktop/E-learning/web
+npm error workspace elearning-web@0.1.0
+npm error location /home/Josias/Desktop/E-learning/web
+npm error command failed
+npm error command sh -c next build

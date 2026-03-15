@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../shared/widgets/profile_header.dart';
+import '../../../shared/widgets/profile_header.dart';
 
 class TeacherDashboard extends StatefulWidget {
   const TeacherDashboard({Key? key}) : super(key: key);
@@ -47,42 +47,58 @@ class _TeacherDashboardState extends State<TeacherDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        title: const Text('EduFlow Prof', style: TextStyle(fontWeight: FontWeight.w900, color: Color(0xFF0F172A))),
-        backgroundColor: Colors.white,
-        elevation: 0,
+        title: Text(
+          'EduFlow Prof',
+          style: theme.textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.w900,
+            letterSpacing: -0.5,
+          ),
+        ),
         actions: [
           const ProfileHeader(),
           IconButton(
-            icon: const Icon(Icons.logout_rounded, color: Colors.grey),
+            icon: Icon(Icons.logout_rounded, color: theme.colorScheme.onSurface.withOpacity(0.5)),
             onPressed: _signOut,
           ),
           const SizedBox(width: 8),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => context.push('/courses/new'), 
-        backgroundColor: const Color(0xFF0F172A),
+        onPressed: () async {
+          final result = await context.push('/courses/new');
+          if (result == true) {
+            setState(() => _isLoading = true);
+            _fetchMyCourses();
+          }
+        }, 
+        backgroundColor: theme.colorScheme.primary,
         icon: const Icon(Icons.add_rounded, color: Colors.white),
         label: const Text('Nouveau Cours', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       ),
       body: _isLoading 
         ? const Center(child: CircularProgressIndicator())
         : ListView(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
             children: [
-              const Text(
+              Text(
                 'Espace Enseignant 🎓',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
                 'Gérez vos contenus et interagissez avec vos élèves.',
-                style: TextStyle(color: Colors.grey[500], fontSize: 14),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onSurface.withOpacity(0.6),
+                ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 32),
 
               // Navigation Cards
               Row(
@@ -106,44 +122,107 @@ class _TeacherDashboardState extends State<TeacherDashboard> {
                   ),
                 ],
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 48),
               
-              const Text('Vos cours récents', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 16),
+              Text(
+                'Vos cours récents',
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
 
               if (_courses.isEmpty)
-                const Center(child: Padding(
-                  padding: EdgeInsets.all(32.0),
-                  child: Text("Vous n'avez pas encore créé de cours.", style: TextStyle(color: Colors.grey)),
-                ))
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: theme.cardTheme.color,
+                    borderRadius: BorderRadius.circular(32),
+                    border: Border.all(color: theme.dividerColor),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.primary.withOpacity(0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(Icons.book_outlined, size: 48, color: theme.colorScheme.primary),
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
+                        'Aucun cours créé',
+                        style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Commencez par créer votre premier cours dès maintenant.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: theme.colorScheme.onSurface.withOpacity(0.5)),
+                      ),
+                    ],
+                  ),
+                )
               else
                 ..._courses.map((c) => Container(
-                  margin: const EdgeInsets.only(bottom: 12),
+                  margin: const EdgeInsets.only(bottom: 16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.grey.shade100),
+                    color: theme.cardTheme.color,
+                    borderRadius: BorderRadius.circular(24),
+                    border: Border.all(
+                      color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.02),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     leading: Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(color: const Color(0xFF6366F1).withOpacity(0.05), borderRadius: BorderRadius.circular(14)),
-                      child: const Icon(Icons.book_rounded, color: Color(0xFF6366F1)),
+                      width: 52,
+                      height: 52,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary.withOpacity(0.1), 
+                        borderRadius: BorderRadius.circular(16)
+                      ),
+                      child: Icon(Icons.auto_stories_rounded, color: theme.colorScheme.primary),
                     ),
-                    title: Text(c['title'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                    subtitle: Text(
-                      c['status'] == 'published' ? 'En ligne' : 'Brouillon',
-                      style: TextStyle(
-                        color: c['status'] == 'published' ? Colors.green : Colors.orange,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 11,
+                    title: Text(
+                      c['title'], 
+                      style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)
+                    ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: c['status'] == 'published' ? const Color(0xFF10B981) : const Color(0xFFF59E0B),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            c['status'] == 'published' ? 'En ligne' : 'Brouillon',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: theme.colorScheme.onSurface.withOpacity(0.6),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     trailing: const Icon(Icons.chevron_right_rounded, color: Colors.grey),
                   ),
                 )),
+              const SizedBox(height: 80), // Space for FAB
             ],
           ),
     );
@@ -160,20 +239,47 @@ class _NavCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: color.withOpacity(0.1)),
+          color: theme.cardTheme.color,
+          borderRadius: BorderRadius.circular(32),
+          border: Border.all(
+            color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: color.withOpacity(0.08),
+              blurRadius: 24,
+              offset: const Offset(0, 8),
+            ),
+          ],
         ),
         child: Column(
           children: [
-            Icon(icon, color: color, size: 32),
-            const SizedBox(height: 12),
-            Text(title, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Icon(icon, color: color, size: 32),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
           ],
         ),
       ),

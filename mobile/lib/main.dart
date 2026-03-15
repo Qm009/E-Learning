@@ -40,13 +40,15 @@ class EduFlowApp extends StatelessWidget {
     final isLight = brightness == Brightness.light;
     return ThemeData(
       useMaterial3: true,
+      scaffoldBackgroundColor: isLight ? const Color(0xFFF8FAFC) : const Color(0xFF0F172A),
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF6366F1),
-        secondary: const Color(0xFFF59E0B),
+        seedColor: const Color(0xFF6366F1), // Primary
+        primary: const Color(0xFF6366F1),
+        secondary: const Color(0xFFF59E0B), // Accent
         error: const Color(0xFFEF4444),
         brightness: brightness,
         background: isLight ? const Color(0xFFF8FAFC) : const Color(0xFF0F172A),
-        surface: isLight ? Colors.white : const Color(0xFF1E293B),
+        surface: isLight ? Colors.white : const Color(0xFF161E35), // Dark mode cards
       ),
       textTheme: GoogleFonts.interTextTheme(
         isLight ? ThemeData.light().textTheme : ThemeData.dark().textTheme,
@@ -54,34 +56,45 @@ class EduFlowApp extends StatelessWidget {
       appBarTheme: AppBarTheme(
         centerTitle: false,
         elevation: 0,
-        backgroundColor: isLight ? Colors.white : const Color(0xFF0F172A),
+        backgroundColor: isLight ? const Color(0xFFF8FAFC) : const Color(0xFF0F172A),
         foregroundColor: isLight ? const Color(0xFF0F172A) : Colors.white,
         surfaceTintColor: Colors.transparent,
+      ),
+      cardTheme: CardTheme(
+        color: isLight ? Colors.white : const Color(0xFF161E35),
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+          side: BorderSide(
+            color: isLight ? const Color(0xFFE2E8F0) : const Color(0xFF334155),
+            width: 1,
+          ),
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF6366F1),
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)), // Rounder like Web
           elevation: 0,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: isLight ? const Color(0xFFE2E8F0) : const Color(0xFF334155)),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade200),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: isLight ? const Color(0xFFE2E8F0) : const Color(0xFF334155)),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(color: Color(0xFF6366F1), width: 2),
         ),
         filled: true,
-        fillColor: isLight ? const Color(0xFFF8FAFC) : const Color(0xFF1E293B),
+        fillColor: isLight ? Colors.white : const Color(0xFF1E293B),
       ),
     );
   }

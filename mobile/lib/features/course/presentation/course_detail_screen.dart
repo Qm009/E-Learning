@@ -27,21 +27,14 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     try {
       final courseId = widget.course['id'];
       
-      // Fetch materials
-      final mats = await supabase
-          .from('course_materials')
-          .select('*')
-          .eq('course_id', courseId);
-
-      // Fetch quizzes
-      final quizzes = await supabase
-          .from('quizzes')
-          .select('*')
-          .eq('course_id', courseId);
+      final results = await Future.wait([
+        supabase.from('course_materials').select('*').eq('course_id', courseId),
+        supabase.from('quizzes').select('*').eq('course_id', courseId),
+      ]);
 
       setState(() {
-        _materials = mats;
-        _quizzes = quizzes;
+        _materials = results[0];
+        _quizzes = results[1];
         _isLoading = false;
       });
     } catch (e) {
@@ -58,55 +51,93 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 200,
+            expandedHeight: 240,
             pinned: true,
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                backgroundColor: Colors.black.withOpacity(0.3),
+                child: const BackButton(color: Colors.white),
+              ),
+            ),
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(widget.course['title'] ?? 'Cours', 
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+              title: Text(
+                widget.course['title'] ?? 'Détails du Cours',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                  letterSpacing: -0.5,
+                  shadows: [Shadow(blurRadius: 10, color: Colors.black45, offset: Offset(0, 2))],
+                ),
+              ),
               background: Stack(
                 fit: StackFit.expand,
                 children: [
                   if (widget.course['image_url'] != null)
                     Image.network(widget.course['image_url'], fit: BoxFit.cover)
                   else
-                    Container(color: Colors.indigo),
-                  Container(decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.transparent, Colors.black.withOpacity(0.8)],
+                    Container(color: theme.colorScheme.primary),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withOpacity(0.0),
+                          Colors.black.withOpacity(0.6),
+                          Colors.black.withOpacity(0.9),
+                        ],
+                      ),
                     ),
-                  )),
+                  ),
                 ],
               ),
             ),
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const Text('Description', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                   const SizedBox(height: 12),
-                   Text(widget.course['description'] ?? 'Aucune description disponible.',
-                      style: TextStyle(color: Colors.grey[600], height: 1.5)),
-                   
-                   const SizedBox(height: 32),
-                   _buildSectionHeader('Supports de cours', Icons.book_rounded, _materials.length),
-                   const SizedBox(height: 12),
-                   _buildMaterialsList(),
+                  Text(
+                    'À PROPOS DE CE COURS',
+                    style: theme.textTheme.labelLarge?.copyWith(
+                      color: theme.colorScheme.primary,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.2,
+                      fontSize: 11,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    widget.course['description'] ?? 'Apprenez les bases et maîtrisez ce sujet avec nos ressources expertes.',
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.onSurface.withOpacity(0.7),
+                      height: 1.6,
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  
+                  _buildSectionHeader(theme, 'CONTENU DU COURS', Icons.auto_stories_rounded),
+                  const SizedBox(height: 16),
+                  _buildMaterialsList(theme, isDark),
 
-                   const SizedBox(height: 32),
-                   _buildSectionHeader('Quiz & Évaluations', Icons.psychology_rounded, _quizzes.length),
-                   const SizedBox(height: 12),
-                   _buildQuizzesList(),
-                   
-                   const SizedBox(height: 100),
+                  const SizedBox(height: 40),
+                  _buildSectionHeader(theme, 'ÉVALUATIONS AI', Icons.psychology_rounded),
+                  const SizedBox(height: 16),
+                  _buildQuizzesList(theme, isDark),
+                  
+                  const SizedBox(height: 100),
                 ],
               ),
             ),
@@ -116,82 +147,148 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  Widget _buildSectionHeader(String title, IconData icon, int count) {
+  Widget _buildSectionHeader(ThemeData theme, String title, IconData icon) {
     return Row(
       children: [
-        Icon(icon, color: const Color(0xFF6366F1), size: 24),
-        const SizedBox(width: 8),
-        Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        const Spacer(),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Colors.grey[100],
+            color: theme.colorScheme.primary.withOpacity(0.1),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Text('$count', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+          child: Icon(icon, color: theme.colorScheme.primary, size: 20),
+        ),
+        const SizedBox(width: 12),
+        Text(
+          title, 
+          style: theme.textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.w900,
+            letterSpacing: 1.1,
+          )
         ),
       ],
     );
   }
 
-  Widget _buildMaterialsList() {
+  Widget _buildMaterialsList(ThemeData theme, bool isDark) {
     if (_isLoading) return const Center(child: CircularProgressIndicator());
     if (_materials.isEmpty) {
-      return Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: Colors.grey[50],
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: const Center(child: Text('Aucun document disponible', style: TextStyle(color: Colors.grey))),
-      );
+      return _EmptyStateCard(theme: theme, text: 'Aucun document disponible');
     }
 
     return Column(
-      children: _materials.map((m) => ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        leading: const Icon(Icons.file_present_rounded, color: Colors.indigo),
-        title: Text(m['file_name'] ?? 'Document', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-        subtitle: Text((m['file_type'] ?? 'PDF').toUpperCase(), style: const TextStyle(fontSize: 11)),
-        trailing: IconButton(
-          icon: const Icon(Icons.download_rounded),
-          onPressed: () => _downloadFile(m['file_url']),
+      children: _materials.map((m) => Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        decoration: BoxDecoration(
+          color: theme.cardTheme.color,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0)),
         ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        tileColor: Colors.white,
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          leading: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.blue.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(Icons.description_rounded, color: Colors.blue, size: 24),
+          ),
+          title: Text(
+            m['file_name'] ?? 'Document sans nom', 
+            style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold)
+          ),
+          subtitle: Text(
+            (m['file_type'] ?? 'PDF').toUpperCase(), 
+            style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.5))
+          ),
+          trailing: IconButton(
+            icon: Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.primary.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.download_rounded, color: theme.colorScheme.primary, size: 20),
+            ),
+            onPressed: () => _downloadFile(m['file_url']),
+          ),
+        ),
       )).toList(),
     );
   }
 
-  Widget _buildQuizzesList() {
+  Widget _buildQuizzesList(ThemeData theme, bool isDark) {
     if (_isLoading) return const Center(child: CircularProgressIndicator());
     if (_quizzes.isEmpty) {
-      return Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: Colors.grey[50],
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: const Center(child: Text('Aucun quiz disponible', style: TextStyle(color: Colors.grey))),
-      );
+      return _EmptyStateCard(theme: theme, text: 'Aucun quiz disponible');
     }
 
     return Column(
-      children: _quizzes.map((q) => ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        leading: const Icon(Icons.quiz_rounded, color: Colors.orange),
-        title: Text(q['title'] ?? 'Quiz', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-        trailing: const Icon(Icons.chevron_right_rounded),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => QuizPlayerScreen(quiz: q)),
-          );
-        },
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        tileColor: Colors.white,
+      children: _quizzes.map((q) => Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        decoration: BoxDecoration(
+          color: theme.cardTheme.color,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0)),
+        ),
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          leading: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xFF6366F1).withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(Icons.psychology_rounded, color: Color(0xFF6366F1), size: 24),
+          ),
+          title: Text(
+            q['title'] ?? 'Évaluation', 
+            style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold)
+          ),
+          subtitle: Text(
+            'Testez vos connaissances',
+            style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.5))
+          ),
+          trailing: const Icon(Icons.chevron_right_rounded),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => QuizPlayerScreen(quiz: q)),
+            );
+          },
+        ),
       )).toList(),
+    );
+  }
+}
+
+class _EmptyStateCard extends StatelessWidget {
+  final ThemeData theme;
+  final String text;
+
+  const _EmptyStateCard({required this.theme, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(32),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.onSurface.withOpacity(0.02),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: theme.dividerColor, style: BorderStyle.none),
+      ),
+      child: Column(
+        children: [
+          Icon(Icons.info_outline_rounded, color: theme.colorScheme.onSurface.withOpacity(0.1), size: 32),
+          const SizedBox(height: 12),
+          Text(
+            text, 
+            style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.3))
+          ),
+        ],
+      ),
     );
   }
 }
