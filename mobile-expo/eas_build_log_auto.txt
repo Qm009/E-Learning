@@ -1,0 +1,5 @@
+The field "cli.appVersionSource" is not set, but it will be required in the future. Learn more: https://docs.expo.dev/build-reference/app-versions/
+Failed to read the app config from the project using "npx expo config" command: npx expo config --json exited with non-zero code: 1.
+Falling back to the version of "@expo/config" shipped with the EAS CLI.
+Failed to resolve plugin for module "expo-router" relative to "/home/Josias/Desktop/E-learning/mobile-expo"
+    Error: build command failed.

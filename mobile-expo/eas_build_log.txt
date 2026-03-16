@@ -1,0 +1,30 @@
+The field "cli.appVersionSource" is not set, but it will be required in the future. Learn more: https://docs.expo.dev/build-reference/app-versions/
+Resolved "preview" environment for the build. Learn more: https://docs.expo.dev/eas/environment-variables/#setting-the-environment-for-your-builds
+No environment variables with visibility "Plain text" and "Sensitive" found for the "preview" environment on EAS.
+
+
+
+The field "cli.appVersionSource" is not set, but it will be required in the future. Learn more: https://docs.expo.dev/build-reference/app-versions/
+✔ Using remote Android credentials (Expo server)
+✔ Using Keystore from configuration: Build Credentials waBJbt8fv- (default)
+
+Compressing project files and uploading to EAS Build. Learn more: https://expo.fyi/eas-build-archive
+- Compressing project files
+- Uploading to EAS Build (0 / 1.8 MB)
+✔ Uploaded to EAS 2m 19s
+
+See logs: https://expo.dev/accounts/josias52/projects/mobile-expo/builds/2f78a20b-002a-405d-92d6-1a929e6dbd9e
+
+Waiting for build to complete. You can press Ctrl+C to exit.
+- Waiting for build to complete.
+  Build queued...
+
+Start builds sooner in the priority queue.
+Sign up for a paid plan at https://expo.dev/accounts/josias52/settings/billing
+
+Waiting in Free tier queue
+
+- Build is about to start
+✖ Build failed
+🤖 Android build failed:
+Unknown error. See logs of the Install dependencies build phase for more information.
